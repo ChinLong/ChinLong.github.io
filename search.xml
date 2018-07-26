@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[jQuery-Ajax的简单封装]]></title>
+    <url>%2F2018%2F07%2F27%2FjQuery-Ajax%E7%AE%80%E5%8D%95%E5%B0%81%E8%A3%85%2F</url>
+    <content type="text"><![CDATA[jQuery-Ajax简单封装最近在写一个小工具，因为小所以就只用了jQuery和Bootstrap。jQuery的ajax方法虽然很具体，但每次写这些就有点嫌多。对Ajax一些常用方法稍微封装了一下。 源码如下:123456789101112131415161718192021222324252627282930313233343536373839/** * Ajax异步请求 * async: true * * @param &#123;string&#125; url 请求URL * @param &#123;string&#125; type GET,POST,PUT,DELETE,HEAD,OPTION方法 * @param &#123;object&#125; callback 回调函数(optional) * @param &#123;object/string&#125; data 请求数据(optional) * @param &#123;object&#125; opt_settings 其他设定(optional) */ $.doAjax = function(url, type, callback, data, opt_settings) &#123; let obj = &#123; url : url, type : type, async : true &#125;; if (typeof callback === "object")&#123; if (typeof callback.success !== "undefined")&#123; obj.success = callback.success &#125; if (typeof callback.complete !== "undefined")&#123; obj.complete = callback.complete &#125; if (typeof callback.error !== "undefined")&#123; obj.error = callback.error &#125; &#125; if(typeof data !== "undefined")&#123; obj.data = typeof data === "object" ? JSON.stringify(data) : data; //obj.dataType = "json"; obj.contentType = "application/json"; &#125; $.ajax($.extend(obj, opt_settings)); &#125;; 调用：123456789101112131415161718192021222324252627282930let url1 = "/users";let url2 = "/users/1";let callback = &#123; success: function(json,xhr,option)&#123; console.log(json); &#125;, error: function(json,xhr,option)&#123; console.error(json); &#125;&#125;;// GET 查询所有用户$.doAjax(url1,"GET",callback1);let user = &#123; username: "xiaoming", sex: "male", age: "28"&#125;;// POST 新增用户$.doAjax(url2, "POST", callback, user);// PUT 新增用户$.doAjax(url2, "PUT", callback, user);// DELETE 删除用户$.doAjax(url2, "DELETE", callback); 这样就是一个简单的封装，使用起来还算比较方便。]]></content>
+      <tags>
+        <tag>jQuery</tag>
+        <tag>Ajax</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Chinlong's Blog]]></title>
     <url>%2F2018%2F07%2F01%2FChinlong's-Blog%2F</url>
     <content type="text"><![CDATA[初次搭建，多多关照。每月坚持写一篇，请监督！]]></content>
